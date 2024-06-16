@@ -5,12 +5,12 @@
     <string name="welcome_page_message">Smart Waste Management</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
-    <string name="title_login_page">Silahkan Login!</string>
+    <string name="title_login_page">Login</string>
     <string name="loading_text">Loading..\n</string>
     <string name="message_login_page">Silahkan masukkan datamu untuk login ke dalam aplikasi.\n</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="title_welcome_singup">Welcome!</string>
+    <string name="title_welcome_singup">Register</string>
     <string name="title_signup_page">Register with your username, email and password for sign up first!</string>
     <string name="name">Name</string>
 </resources>

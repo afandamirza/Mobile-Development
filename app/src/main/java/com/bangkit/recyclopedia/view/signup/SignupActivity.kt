@@ -98,9 +98,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun playAnimation() {
         val titleWelcome =
-            ObjectAnimator.ofFloat(binding.welcomeTextSignupView, View.ALPHA, 1f).setDuration(100)
-        val title =
-            ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)
+            ObjectAnimator.ofFloat(binding.register, View.ALPHA, 1f).setDuration(100)
         val nameTextView =
             ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(100)
         val nameEditTextLayout =
@@ -119,7 +117,6 @@ class SignupActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(
                 titleWelcome,
-                title,
                 nameTextView,
                 nameEditTextLayout,
                 emailTextView,

@@ -11,15 +11,13 @@
         tools:context=".view.login.LoginActivity">
 
         <TextView
-            android:id="@+id/titleTextView"
+            android:id="@+id/login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:alpha="0"
             android:text="@string/title_login_page"
-            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -29,22 +27,6 @@
             app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
             tools:alpha="100" />
 
-        <TextView
-            android:id="@+id/messageTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:alpha="0"
-            android:text="@string/message_login_page"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-            tools:alpha="100" />
 
         <TextView
             android:id="@+id/emailTextView"
@@ -56,11 +38,12 @@
             android:text="@string/email"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/messageTextView"
+            app:layout_constraintTop_toBottomOf="@+id/login"
             tools:alpha="100" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditTextLayout"
+            app:boxStrokeColor="@color/green"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -98,8 +81,8 @@
             tools:alpha="100" />
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:id="@+id/passwordEditTextLayout"
+            app:boxStrokeColor="@color/green"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,6 +116,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:alpha="0"
+            android:textSize="24sp"
             android:backgroundTint="@color/green"
             android:text="@string/login"
             android:textColor="@color/white"
