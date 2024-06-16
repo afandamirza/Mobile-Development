@@ -10,6 +10,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.recyclopedia.data.model.UserLoginModel
 import com.bangkit.recyclopedia.data.model.UserModel
 import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
@@ -28,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        setupViewModel()
+        setupAction()
+        playAnimation()
     }
 
     private fun setupView() {
@@ -76,6 +80,26 @@ class LoginActivity : AppCompatActivity() {
         } else {
             progressBar.visibility = View.GONE
             progressText.visibility = View.GONE
+        }
+    }
+
+    private fun setupAction() {
+        binding.loginButton.setOnClickListener {
+            val email = binding.emailEditText
+            val password = binding.passwordEditText
+
+            if(email.text.toString().isEmpty()) {
+                email.error = "Masukkan Email!"
+            }
+
+            if(password.text.toString().isEmpty()) {
+                password.error = "Masukkan Password!"
+            }
+
+            if (email.error == null && password.error == null) {
+                val user = UserLoginModel(email.text.toString(), password.text.toString())
+                loginViewModel.loginUser(user, this)
+            }
         }
     }
 

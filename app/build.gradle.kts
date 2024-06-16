@@ -4,6 +4,8 @@ plugins {
     id ("kotlin-parcelize")
     id ("kotlin-kapt")
     id("com.google.devtools.ksp") version "1.9.22-1.0.17" apply false
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
 
 android {

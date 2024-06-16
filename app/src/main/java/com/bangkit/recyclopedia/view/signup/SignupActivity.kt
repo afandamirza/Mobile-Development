@@ -7,12 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.bangkit.recyclopedia.R
+import androidx.lifecycle.ViewModelProvider
+import com.bangkit.recyclopedia.data.model.UserSignUpModel
+import com.bangkit.recyclopedia.data.pref.UserPreference
+import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivitySignupBinding
+import com.bangkit.recyclopedia.view.ViewModelFactory
 
 class SignupActivity : AppCompatActivity() {
 
@@ -24,6 +25,9 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        setupViewModel()
+        setupAction()
+        playAnimation()
     }
     private fun setupView() {
         @Suppress("DEPRECATION")
@@ -36,6 +40,60 @@ class SignupActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun setupViewModel(){
+        signupViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore), this)
+        )[SignupViewModel::class.java]
+
+        signupViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        signupViewModel.finishActivity.observe(this) {
+            finish()
+        }
+
+    }
+
+    private fun setupAction() {
+        binding.signupButton.setOnClickListener {
+            val name = binding.nameEditText
+            val email = binding.emailEditText
+            val password = binding.passwordEditText
+
+            if(name.text.toString().isEmpty()) {
+                name.error = "Masukkan Nama!"
+            }
+
+            if(email.text.toString().isEmpty()) {
+                email.error = "Masukkan Email!"
+            }
+
+            if(password.text.toString().isEmpty()) {
+                password.error = "Masukkan Password!"
+            }
+
+            if (name.error == null && email.error == null && password.error == null) {
+                val user = UserSignUpModel(name.text.toString(), email.text.toString(), password.text.toString())
+                signupViewModel.signupUser(user, this)
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        val progressBar = binding.progressBar
+        val progressText = binding.progressTextMain
+
+        if (isLoading) {
+            progressBar.visibility = View.VISIBLE
+            progressText.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+            progressText.visibility = View.GONE
+        }
     }
 
     private fun playAnimation() {
