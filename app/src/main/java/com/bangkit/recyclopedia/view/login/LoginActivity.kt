@@ -16,7 +16,7 @@ import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivityLoginBinding
 import com.bangkit.recyclopedia.view.ViewModelFactory
-import com.bangkit.recyclopedia.view.main.MainActivity
+import com.bangkit.recyclopedia.view.landingpage.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.finishActivity.observe(this) {
             if (it == true) {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
