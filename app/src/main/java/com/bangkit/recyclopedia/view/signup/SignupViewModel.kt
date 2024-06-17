@@ -13,14 +13,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignupViewModel : ViewModel() {
-    private val _finishingActivity = MutableLiveData<Unit>()
-    val finishActivity: LiveData<Unit> = _finishingActivity
+    private val _finishingActivity = MutableLiveData<Boolean>()
+    val finishActivity: LiveData<Boolean> = _finishingActivity
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 
     fun signupUser(user: UserSignUpModel, context: Context) {
-        _isLoading.value = false
+        _isLoading.value = true
         val dataClient = getApiService().signupUser(user)
         dataClient.enqueue(object : Callback<FileUploadResponse> {
             override fun onResponse(
@@ -31,17 +31,28 @@ class SignupViewModel : ViewModel() {
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null && !responseBody.error) {
-                        showAlertDialog("Berhasil!", "Akunmu berhasil dibuat!. Silahkan Login untuk masuk ke dalam aplikasi.", context)
+                        showAlertDialog("Success!", "Your account has been successfully created! Check your email first for authentication confirmation.", context)
                     }
                 } else {
-                    showAlertDialog("Pendaftaran gagal", response.message(), context)
+                    var posButtonClicked = false
+                    AlertDialog.Builder(context).apply {
+                        setTitle("Register Failed")
+                        setMessage(response.message())
+                        setPositiveButton("Continue") { _, _ ->
+                            if (posButtonClicked){
+                                _finishingActivity.value = true
+                            }
+                        }
+                        create()
+                        show()
+                    }
                 }
 
             }
 
             override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
                 _isLoading.value = false
-                showAlertDialog("Pendaftaran Gagal", t.message, context)
+                showAlertDialog("Register failed!", t.message, context)
             }
         })
 
@@ -51,8 +62,8 @@ class SignupViewModel : ViewModel() {
         AlertDialog.Builder(context).apply {
             setTitle(title)
             setMessage(message)
-            setPositiveButton("Lanjut") { _, _ ->
-                _finishingActivity.value = Unit
+            setPositiveButton("Continue") { _, _ ->
+                _finishingActivity.value = true
             }
             setCancelable(false)
             create()

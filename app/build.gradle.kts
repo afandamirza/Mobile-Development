@@ -21,7 +21,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1/\"")
+        buildConfigField("String", "API_URL", "\"https://recyclopedia-mize22tx5q-et.a.run.app\"")
 
     }
 

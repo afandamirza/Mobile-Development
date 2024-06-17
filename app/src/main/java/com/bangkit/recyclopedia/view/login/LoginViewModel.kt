@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bangkit.recyclopedia.api.ApiConfig.getApiService
-import com.bangkit.recyclopedia.api.response.LoginAppResponse
+import com.bangkit.recyclopedia.api.response.LoginResponse
 import com.bangkit.recyclopedia.data.model.UserLoginModel
 import com.bangkit.recyclopedia.data.model.UserModel
 import com.bangkit.recyclopedia.data.pref.UserPreference
@@ -26,24 +26,25 @@ class LoginViewModel(private val preference: UserPreference)  : ViewModel() {
     val isLoading : LiveData<Boolean> = _isLoading
     fun loginUser(user: UserLoginModel, context: Context) {
         _isLoading.value = true
-        val client = getApiService().loginUser(user)
-        client.enqueue(object : Callback<LoginAppResponse> {
+        val client = getApiService().login(user)
+        client.enqueue(object : Callback<LoginResponse> {
 
-            override fun onResponse(call: Call<LoginAppResponse>, response: Response<LoginAppResponse>) {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 _isLoading.value = false
+
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    if (responseBody != null && !responseBody.error) {
-                        responseBody.loginResult?.let { login(it.token) }
-                        showAlertDialog("Login Berhasil!", "Kamu bisa login sekarang dan menikmati aplikasi story bersama orang lain!", "Ayo!", context)
-
+                    if (responseBody != null && responseBody.userCredential != null) {
+                        responseBody.userCredential.user?.let {
+                            login(it.stsTokenManager!!.accessToken) }
+                        showAlertDialog("Login Success!", "Enjoy the App!", "Let's Go!", context)
                     }
                 } else {
                     var posButtonClicked = false
                     AlertDialog.Builder(context).apply {
-                        setTitle("Login Gagal")
+                        setTitle("Login Failed")
                         setMessage(response.message())
-                        setPositiveButton("Oke") { _, _ ->
+                        setPositiveButton("Continue") { _, _ ->
                             if (posButtonClicked){
                                 _finishingActivity.value = true
                             }
@@ -54,9 +55,9 @@ class LoginViewModel(private val preference: UserPreference)  : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<LoginAppResponse>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 _isLoading.value = false
-                showAlertDialog("Login Gagal", t.message, "Oke", context)
+                showAlertDialog("Login Failed", t.message, "Continue", context)
             }
         })
     }
@@ -72,7 +73,6 @@ class LoginViewModel(private val preference: UserPreference)  : ViewModel() {
             create()
             show()
         }
-
     }
 
     fun getUser(): LiveData<UserModel> {

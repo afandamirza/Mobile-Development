@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.recyclopedia.data.pref.UserPreference
+import com.bangkit.recyclopedia.view.homepage.HomeViewModel
 import com.bangkit.recyclopedia.view.login.LoginViewModel
 import com.bangkit.recyclopedia.view.main.MainViewModel
 import com.bangkit.recyclopedia.view.signup.SignupViewModel
@@ -21,6 +22,9 @@ class ViewModelFactory(private val preference: UserPreference, private val conte
             }
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel() as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(preference) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

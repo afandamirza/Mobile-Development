@@ -65,15 +65,15 @@ class SignupActivity : AppCompatActivity() {
             val password = binding.passwordEditText
 
             if(name.text.toString().isEmpty()) {
-                name.error = "Masukkan Nama!"
+                name.error = "Put Username!"
             }
 
             if(email.text.toString().isEmpty()) {
-                email.error = "Masukkan Email!"
+                email.error = "Put Email!"
             }
 
             if(password.text.toString().isEmpty()) {
-                password.error = "Masukkan Password!"
+                password.error = "Put Password!"
             }
 
             if (name.error == null && email.error == null && password.error == null) {

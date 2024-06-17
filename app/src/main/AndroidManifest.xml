@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Recyclopedia"
         tools:targetApi="31">
         <activity
-            android:name=".view.landingpage.HomeActivity"
+            android:name=".view.homepage.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".view.signup.SignupActivity"

@@ -16,7 +16,7 @@ import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivityMainBinding
 import com.bangkit.recyclopedia.view.ViewModelFactory
-import com.bangkit.recyclopedia.view.landingpage.HomeActivity
+import com.bangkit.recyclopedia.view.homepage.HomeActivity
 import com.bangkit.recyclopedia.view.welcome.WelcomePageActivity
 
 

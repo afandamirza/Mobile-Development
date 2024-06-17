@@ -2,7 +2,7 @@ package com.bangkit.recyclopedia.api
 
 
 import com.bangkit.recyclopedia.api.response.FileUploadResponse
-import com.bangkit.recyclopedia.api.response.LoginAppResponse
+import com.bangkit.recyclopedia.api.response.LoginResponse
 import com.bangkit.recyclopedia.data.model.UserLoginModel
 import com.bangkit.recyclopedia.data.model.UserSignUpModel
 import okhttp3.MultipartBody
@@ -16,16 +16,21 @@ import retrofit2.http.Part
 
 interface ApiService {
     // Register New User
-    @POST("register")
+    @POST("api/register")
     fun signupUser(
         @Body user: UserSignUpModel
     ): Call<FileUploadResponse>
 
     // User Login
-    @POST("login")
-    fun loginUser(
-        @Body user: UserLoginModel
-    ): Call<LoginAppResponse>
+//    @POST("login")
+//    fun loginUser(
+//        @Body user: UserLoginModel
+//    ): Call<LoginAppResponse>
+
+    @POST("api/login")
+    fun login(
+        @Body loginRequest: UserLoginModel
+    ): Call<LoginResponse>
 
     // Get All Stories With Paging
 //    @GET("stories")

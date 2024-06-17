@@ -16,7 +16,7 @@ import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivityLoginBinding
 import com.bangkit.recyclopedia.view.ViewModelFactory
-import com.bangkit.recyclopedia.view.landingpage.HomeActivity
+import com.bangkit.recyclopedia.view.homepage.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -89,11 +89,11 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordEditText
 
             if(email.text.toString().isEmpty()) {
-                email.error = "Masukkan Email!"
+                email.error = "Insert Email!"
             }
 
             if(password.text.toString().isEmpty()) {
-                password.error = "Masukkan Password!"
+                password.error = "Insert Password!"
             }
 
             if (email.error == null && password.error == null) {
