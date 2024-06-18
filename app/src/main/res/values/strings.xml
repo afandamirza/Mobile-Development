@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Recyclopedia</string>
+    <string name="recyclopedia">Recyclopedia</string>
+    <string name="welcome_page_title">Recyclopedia</string>
+    <string name="welcome_page_message">Smart Waste Management</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="title_login_page">Silahkan Login!</string>
+    <string name="loading_text">Loading..\n</string>
+    <string name="message_login_page">Silahkan masukkan datamu untuk login ke dalam aplikasi.\n</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="title_welcome_singup">Welcome!</string>
+    <string name="title_signup_page">Register with your username, email and password for sign up first!</string>
+    <string name="name">Name</string>
+    <string name="text_idea"><b>Tools and Materials:</b>\n\t• Used plastic bottle (small, medium, or large)\n\t• Ruler\n\t• Pen or marker\n\t• Scissors\n\t• Cutter</string>
+    <string name="text_instruction"><b>Instructions:</b>\n\t1. Cut the plastic bottle into two parts. The bottom part of the bottle will be used to make the flower vase.\n\t2. Draw vertical lines around the bottle with equal spacing and length.\n\t3. Cut Along the Lines:\n\t4. Cut along the marked lines using scissors.\n\t5. After cutting, place the bottle upside down and press it firmly so that the cuts spread out.\n\t6. Slowly bend the cut strips to the side and tuck the end of each strip into the inside of the adjacent section.\n\t7. Repeat this process for all the cut strips around the plastic bottle.</string>
+</resources>
