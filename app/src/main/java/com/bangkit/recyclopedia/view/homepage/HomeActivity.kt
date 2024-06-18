@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         val items = listOf(
-            MyItem(R.drawable.img, "Cardboard", "Cardboard is a type of waste that comes from thick and strong paper. So that nature can decompose or destroy..."),
+            MyItem(R.drawable.img, "Meow", "Cardboard is a type of waste that comes from thick and strong paper. So that nature can decompose or destroy..."),
             MyItem(R.drawable.img, "Paper", "Paper is a type of waste that comes from wood fiber or other organic materials which are processed into thin sheets. Paper is very commonly used in everyday life..."),
             MyItem(R.drawable.img, "Glass Bottle", "Glass bottles are a type of waste that comes from glass which is produced by melting sand, sodium carbonate and limestone. Glass is very commonly used..."),
             MyItem(R.drawable.img, "Plastic Bottle", "Plastic bottles are a type of waste that comes from synthetic polymer materials such as PET (polyethylene terephthalate), HDPE (high-density polyethylene), and other types of plastic..."),
