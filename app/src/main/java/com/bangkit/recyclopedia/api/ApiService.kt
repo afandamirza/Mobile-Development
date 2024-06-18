@@ -2,6 +2,7 @@ package com.bangkit.recyclopedia.api
 
 
 import com.bangkit.recyclopedia.api.response.FileUploadResponse
+import com.bangkit.recyclopedia.api.response.ImagePredictionResponse
 import com.bangkit.recyclopedia.api.response.LoginResponse
 import com.bangkit.recyclopedia.data.model.UserLoginModel
 import com.bangkit.recyclopedia.data.model.UserSignUpModel
@@ -21,16 +22,17 @@ interface ApiService {
         @Body user: UserSignUpModel
     ): Call<FileUploadResponse>
 
-    // User Login
-//    @POST("login")
-//    fun loginUser(
-//        @Body user: UserLoginModel
-//    ): Call<LoginAppResponse>
-
     @POST("api/login")
     fun login(
         @Body loginRequest: UserLoginModel
     ): Call<LoginResponse>
+
+    @Multipart
+    @POST("predict")
+    fun uploadImage(
+        @Part image: MultipartBody.Part,
+        @Part("description") description: RequestBody
+    ): Call<ImagePredictionResponse>
 
     // Get All Stories With Paging
 //    @GET("stories")
