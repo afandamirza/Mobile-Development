@@ -278,6 +278,8 @@ class TakePhotoActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun startGuessing() {
         imageUri?.let {
             uploadImage(it)
