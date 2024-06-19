@@ -15,4 +15,7 @@
     <string name="name">Name</string>
     <string name="list_of_recyclable_items">List of Recyclable Items</string>
     <string name="logout">logout</string>
+    <string name="text_idea">idea</string>
+    <string name="text_instruction">instruction</string>
+    <string name="confidence_score">Skor</string>
 </resources>

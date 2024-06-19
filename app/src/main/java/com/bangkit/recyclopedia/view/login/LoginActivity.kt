@@ -89,11 +89,11 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordEditText
 
             if(email.text.toString().isEmpty()) {
-                email.error = "Insert Email!"
+                email.error = "Masukkan Email!"
             }
 
             if(password.text.toString().isEmpty()) {
-                password.error = "Insert Password!"
+                password.error = "Masukkan Password!"
             }
 
             if (email.error == null && password.error == null) {

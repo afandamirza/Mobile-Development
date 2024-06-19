@@ -1,31 +1,57 @@
 package com.bangkit.recyclopedia.view.homepage
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bangkit.recyclopedia.databinding.ItemRecyclerviewHomeBinding
 
-class HomeAdapter (private val items: List<MyItem>) : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
+data class RecycleItem(
+    @DrawableRes val image: Int,
+    val title: String,
+    val description: String
+)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+class HomeAdapter : ListAdapter<RecycleItem, HomeAdapter.ViewHolder>(
+    RecycleItemDiffCallback()
+) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): HomeAdapter.ViewHolder {
         val binding = ItemRecyclerviewHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = items[position]
+    override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
+        val item = getItem(position)
         holder.bind(item)
     }
 
-    override fun getItemCount(): Int = items.size
+    class RecycleItemDiffCallback : DiffUtil.ItemCallback<RecycleItem>() {
+        override fun areItemsTheSame(oldItem: RecycleItem, newItem: RecycleItem): Boolean {
+            return oldItem == newItem
+        }
 
-    class MyViewHolder(private val binding: ItemRecyclerviewHomeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MyItem) {
-            binding.imageView.setImageResource(item.imageResId)
-            binding.titleTextView.text = item.title
-            binding.descriptionTextView.text = item.description
+        override fun areContentsTheSame(oldItem: RecycleItem, newItem: RecycleItem): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    inner class ViewHolder(private val binding: ItemRecyclerviewHomeBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: RecycleItem) {
+            binding.apply {
+                ivRecycleItem.load(item.image) {
+                    crossfade(true)
+                }
+                tvItemName.text = item.title
+                tvItemDescription.text = item.description
+                cardView.setCardBackgroundColor(if (absoluteAdapterPosition % 2 == 0) Color.parseColor("#198F24") else Color.parseColor("#1D9738"))
+            }
         }
     }
 }
-
-data class MyItem(val imageResId: Int, val title: String, val description: String)

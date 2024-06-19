@@ -23,8 +23,8 @@ class CustomViewPassword : TextInputEditText {
                 //Nothing
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 8) {
-                    setError("Password must not be less than 8 characters!", null)
+                if (s.toString().isEmpty()) {
+                    setError("Password tidak boleh kurang dari 1 karakter!", null)
                 } else {
                     error = null
                 }

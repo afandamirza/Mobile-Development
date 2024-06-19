@@ -37,14 +37,14 @@ class LoginViewModel(private val preference: UserPreference)  : ViewModel() {
                     if (responseBody != null && responseBody.userCredential != null) {
                         responseBody.userCredential.user?.let {
                             login(it.stsTokenManager!!.accessToken) }
-                        showAlertDialog("Login Success!", "Enjoy the App!", "Let's Go!", context)
+                        showAlertDialog("Login Berhasil!", "Selamat menggunakan aplikasinya!!", "Let's Go!", context)
                     }
                 } else {
                     var posButtonClicked = false
                     AlertDialog.Builder(context).apply {
-                        setTitle("Login Failed")
+                        setTitle("Login Gagal")
                         setMessage(response.message())
-                        setPositiveButton("Continue") { _, _ ->
+                        setPositiveButton("Lanjut") { _, _ ->
                             if (posButtonClicked){
                                 _finishingActivity.value = true
                             }
@@ -57,7 +57,7 @@ class LoginViewModel(private val preference: UserPreference)  : ViewModel() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 _isLoading.value = false
-                showAlertDialog("Login Failed", t.message, "Continue", context)
+                showAlertDialog("Login Gagal", t.message, "Lanjut", context)
             }
         })
     }

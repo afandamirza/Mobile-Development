@@ -23,6 +23,7 @@ class SignupViewModel : ViewModel() {
         _isLoading.value = true
         val dataClient = getApiService().signupUser(user)
         dataClient.enqueue(object : Callback<FileUploadResponse> {
+
             override fun onResponse(
                 call: Call<FileUploadResponse>,
                 response: Response<FileUploadResponse>
@@ -31,14 +32,14 @@ class SignupViewModel : ViewModel() {
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null && !responseBody.error) {
-                        showAlertDialog("Success!", "Your account has been successfully created! Check your email first for authentication confirmation.", context)
+                        showAlertDialog("Success!", "Pendaftaran akun berhasil! Cek emailmu untuk konfirmasi akun.", context)
                     }
                 } else {
                     var posButtonClicked = false
                     AlertDialog.Builder(context).apply {
-                        setTitle("Register Failed")
+                        setTitle("Pendaftaran Gagal!")
                         setMessage(response.message())
-                        setPositiveButton("Continue") { _, _ ->
+                        setPositiveButton("Lanjutkan") { _, _ ->
                             if (posButtonClicked){
                                 _finishingActivity.value = true
                             }
@@ -52,7 +53,7 @@ class SignupViewModel : ViewModel() {
 
             override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
                 _isLoading.value = false
-                showAlertDialog("Register failed!", t.message, context)
+                showAlertDialog("Pendaftaran Gagal!", t.message, context)
             }
         })
 
@@ -62,7 +63,7 @@ class SignupViewModel : ViewModel() {
         AlertDialog.Builder(context).apply {
             setTitle(title)
             setMessage(message)
-            setPositiveButton("Continue") { _, _ ->
+            setPositiveButton("Lanjutkan") { _, _ ->
                 _finishingActivity.value = true
             }
             setCancelable(false)

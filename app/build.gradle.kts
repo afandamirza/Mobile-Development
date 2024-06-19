@@ -57,6 +57,9 @@ dependencies {
     implementation("androidx.activity:activity:1.8.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.lifecycle)
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -72,12 +75,15 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
+
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation ("com.github.bumptech.glide:glide:4.11.0")
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    implementation("io.coil-kt:coil:2.6.0")
 
 
     val room_version = "2.6.1"
@@ -115,4 +121,12 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") //TestDispatcher
     testImplementation("org.mockito:mockito-core:3.12.4")
     testImplementation("org.mockito:mockito-inline:3.12.4")
+
+    val camerax_version = "1.4.0-beta02"
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-extensions:${camerax_version}")
+
+
 }

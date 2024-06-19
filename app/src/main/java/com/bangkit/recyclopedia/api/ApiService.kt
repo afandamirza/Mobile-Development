@@ -4,7 +4,9 @@ package com.bangkit.recyclopedia.api
 import com.bangkit.recyclopedia.api.response.FileUploadResponse
 import com.bangkit.recyclopedia.api.response.ImagePredictionResponse
 import com.bangkit.recyclopedia.api.response.LoginResponse
+import com.bangkit.recyclopedia.api.response.ResetPasswordResponse
 import com.bangkit.recyclopedia.data.model.UserLoginModel
+import com.bangkit.recyclopedia.data.model.UserResetPasswordModel
 import com.bangkit.recyclopedia.data.model.UserSignUpModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -33,6 +35,11 @@ interface ApiService {
         @Part image: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): Call<ImagePredictionResponse>
+
+    @POST("api/reset-password")
+    fun resetPassword(
+        @Body resetPasswordRequest: UserResetPasswordModel
+    ): Call<ResetPasswordResponse>
 
     // Get All Stories With Paging
 //    @GET("stories")

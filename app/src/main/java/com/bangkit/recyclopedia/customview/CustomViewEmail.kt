@@ -26,7 +26,7 @@ class CustomViewEmail : TextInputEditText {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
-                    setError("Email patterns don't match!", null)
+                    setError("Pola email tidak cocok!", null)
                 } else {
                     error = null
                 }
