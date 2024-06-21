@@ -1,1 +1,1 @@
-Recyclopedia Mobile Development
+Recyclopedia View Applications
