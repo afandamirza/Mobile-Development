@@ -12,7 +12,6 @@ import com.bangkit.recyclopedia.api.response.ResetPasswordResponse
 import com.bangkit.recyclopedia.data.model.UserModel
 import com.bangkit.recyclopedia.data.model.UserResetPasswordModel
 import com.bangkit.recyclopedia.data.pref.UserPreference
-import com.bangkit.recyclopedia.databinding.ActivityProfileBinding
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,7 +42,7 @@ class ProfileViewModel (private val preference: UserPreference)  : ViewModel() {
                     var posButtonClicked = false
                     AlertDialog.Builder(context).apply {
                         setTitle("Aktifitas Gagal!")
-                        setMessage(response.message())
+                        setMessage("Isi Email telebih dahulu ${response.message()}")
                         setPositiveButton("Lanjutkan") { _, _ ->
                             if (posButtonClicked){
                                 _finishingActivity.value = true

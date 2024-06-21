@@ -6,6 +6,9 @@
 
     <uses-feature android:name="android.hardware.camera.any" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -21,6 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recyclopedia"
         tools:targetApi="31">
+        <activity
+            android:name=".view.homepage.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.classification.FailedResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.classification.TrashActionActivity"
+            android:exported="false" />
         <activity
             android:name=".view.classification.ClassificationResultActivity"
             android:exported="false" />
@@ -45,6 +57,7 @@
         <activity
             android:name=".view.takephoto.TakePhotoActivity"
             android:exported="false" />
+
         <activity
             android:name=".view.main.MainActivity"
             android:exported="true">

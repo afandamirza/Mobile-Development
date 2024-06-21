@@ -17,42 +17,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/your_rubbish_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="42dp"
-                android:text="Your rubbish is Plastic Bottle"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:fontFamily="@font/open_sans_bold"
-                android:layout_marginTop="24dp" />
-
-            <TextView
-                android:id="@+id/congrats_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginHorizontal="42dp"
-                android:text="Selamat anda mendapatkan point sebesar 100"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:fontFamily="@font/open_sans"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/confidence_score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginHorizontal="42dp"
-                android:text="Confidence Score: 96.83238863945007"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:fontFamily="@font/open_sans"
-                android:textSize="14sp" />
-
             <ImageButton
+                android:id="@+id/back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/ic_arrow_left"
@@ -71,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="42dp"
-                android:text="Your rubbish is Plastic Bottle"
+                android:text="Jenis sampahmu adalah:"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/open_sans_bold"
@@ -79,8 +45,19 @@
 
             <TextView
                 android:layout_width="match_parent"
+                android:id="@+id/result"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="42dp"
+                android:text="Result"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="36dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/bg_linear_gradient_green"
                 android:text="Fact:"
                 android:paddingHorizontal="16dp"
@@ -90,10 +67,11 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/fact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="Plastic bottles are a type of waste made from synthetic polymers such as PET (polyethylene terephthalate), HDPE (high-density polyethylene), and other types of plastic. Plastic bottles are widely used as containers for beverages, cleaning products, and various other liquids due to their lightweight, strong, and durable nature. It takes a very long time for nature to break down or decompose plastic bottles, usually around 450 years or more. To reduce the volume of plastic bottle waste, plastic can be recycled. An interesting fact about plastic bottles: Recycling one ton of plastic can save approximately 5,774 kWh of energy, 16.3 barrels of oil, 30 cubic meters of landfill space, and reduce carbon dioxide emissions by 2 tons."
+                android:text="@string/fact_description"
                 android:layout_marginHorizontal="36dp"
                 android:fontFamily="@font/open_sans"
                 android:textSize="14sp"
@@ -112,13 +90,15 @@
                 android:textColor="@color/white" />
 
             <ImageView
+                android:id="@+id/ide_gambar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/image_description"
+                android:src="@drawable/plastik_pot"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="28dp" />
 
             <TextView
+                android:id="@+id/judul_ide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -130,6 +110,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/text_alat_dan_bahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="36dp"
@@ -140,6 +121,7 @@
                 android:text="@string/text_idea" />
 
             <TextView
+                android:id="@+id/text_intruksi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="36dp"
@@ -192,8 +174,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_recycling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:background="@drawable/bg_linear_gradient_green_rounded"
         app:backgroundTint="@null"
         android:text="Recycling!"
@@ -206,15 +188,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_throw_away"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="#DADADA"
-        android:text="Throw Away"
-        android:layout_toEndOf="@id/divider"
-        android:layout_marginStart="17dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_linear_gradient_grey_rounded"
+        app:backgroundTint="@null"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
         android:layout_marginBottom="38dp"
-        android:textColor="#1B9536"
+        android:layout_toEndOf="@id/divider"
         android:fontFamily="@font/open_sans_bold"
-        android:textSize="18sp" />
+        android:text="Buang"
+        android:textColor="#1B9536"
+        android:textSize="18sp"/>
 </RelativeLayout>

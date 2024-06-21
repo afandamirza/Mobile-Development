@@ -47,14 +47,8 @@ import java.util.*
 
 class TakePhotoViewModel(private val preference: UserPreference): ViewModel() {
     private val _finishingActivity = MutableLiveData<Boolean>()
-    val finishActivity: LiveData<Boolean> = _finishingActivity
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _location = MutableLiveData<Location>()
-    val location: LiveData<Location> = _location
-
     fun getUser(): LiveData<UserModel> {
         return preference.getUser().asLiveData()
     }

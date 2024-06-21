@@ -1,10 +1,13 @@
+// HistoryAPIResponse.kt
 package com.bangkit.recyclopedia.api.response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-class ListStoriesResponse (
-    @field:SerializedName("listStory")
-    val listStory: List<ListStoryItemsResponse>,
+data class HistoryResponse(
+    @field:SerializedName("data")
+    val data: List<HistoryItemsResponse>,
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -12,4 +15,3 @@ class ListStoriesResponse (
     @field:SerializedName("message")
     val message: String
 )
-

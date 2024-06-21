@@ -18,4 +18,5 @@
     <string name="text_idea">idea</string>
     <string name="text_instruction">instruction</string>
     <string name="confidence_score">Skor</string>
+    <string name="fact_description">Plastic bottles are a type of waste made from synthetic polymers such as PET (polyethylene terephthalate), HDPE (high-density polyethylene), and other types of plastic. Plastic bottles are widely used as containers for beverages, cleaning products, and various other liquids due to their lightweight, strong, and durable nature. It takes a very long time for nature to break down or decompose plastic bottles, usually around 450 years or more. To reduce the volume of plastic bottle waste, plastic can be recycled. An interesting fact about plastic bottles: Recycling one ton of plastic can save approximately 5,774 kWh of energy, 16.3 barrels of oil, 30 cubic meters of landfill space, and reduce carbon dioxide emissions by 2 tons.</string>
 </resources>

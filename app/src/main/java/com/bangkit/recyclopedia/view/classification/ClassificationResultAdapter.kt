@@ -1,5 +1,8 @@
 package com.bangkit.recyclopedia.view.classification
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
@@ -8,7 +11,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.recyclopedia.databinding.ItemRecyclerviewClassificationBinding
 
-class ClassificationResultAdapter : ListAdapter<Int, ClassificationResultAdapter.ViewHolder>(
+class ClassificationResultAdapter(
+    private val context: Context
+) : ListAdapter<Int, ClassificationResultAdapter.ViewHolder>(
     TutorialDiffCallback()
 ) {
 
@@ -22,7 +27,25 @@ class ClassificationResultAdapter : ListAdapter<Int, ClassificationResultAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            // Determine the YouTube link based on the item position
+            val videoUrl = getYouTubeVideoUrl(position)
+            // Launch the YouTube video using an Intent
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl)))
+        }
+    }
+
+    private fun getYouTubeVideoUrl(position: Int): String {
+        return when (position) {
+            0 -> "https://www.youtube.com/watch?v=lOXCHuJVa_c"
+            1 -> "https://www.youtube.com/watch?v=_G2IitNrgIw"
+            2 -> "https://www.youtube.com/watch?v=l_qM7nRLEcw"
+            3 -> "https://www.youtube.com/watch?v=_J4GzEzSNqw"
+            else -> "https://www.youtube.com"
+        }
     }
 
     class ViewHolder(private val binding: ItemRecyclerviewClassificationBinding) :

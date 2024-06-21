@@ -1,13 +1,11 @@
-package com.bangkit.recyclopedia.database
-
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.bangkit.recyclopedia.api.response.ListStoryItemsResponse
 
+import com.bangkit.recyclopedia.api.response.HistoryItemsResponse
 
-@Database(entities = [ListStoryItemsResponse::class], version = 2, exportSchema = false)
+@Database(entities = [HistoryItemsResponse::class], version = 2, exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao

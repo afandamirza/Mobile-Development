@@ -1,20 +1,15 @@
 package com.bangkit.recyclopedia.view.homepage
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bangkit.recyclopedia.databinding.ItemRecyclerviewHomeBinding
 
-data class RecycleItem(
-    @DrawableRes val image: Int,
-    val title: String,
-    val description: String
-)
 
 class HomeAdapter : ListAdapter<RecycleItem, HomeAdapter.ViewHolder>(
     RecycleItemDiffCallback()
@@ -43,6 +38,18 @@ class HomeAdapter : ListAdapter<RecycleItem, HomeAdapter.ViewHolder>(
     }
 
     inner class ViewHolder(private val binding: ItemRecyclerviewHomeBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    val intent = Intent(binding.root.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_RECYCLE_ITEM, item)
+                    binding.root.context.startActivity(intent)
+                }
+            }
+        }
+
         fun bind(item: RecycleItem) {
             binding.apply {
                 ivRecycleItem.load(item.image) {

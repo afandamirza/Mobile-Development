@@ -1,11 +1,7 @@
 package com.bangkit.recyclopedia.view.homepage
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,19 +9,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.recyclopedia.R
-import com.bangkit.recyclopedia.api.ApiConfig
-import com.bangkit.recyclopedia.api.response.ImagePredictionResponse
 import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivityHomeBinding
 import com.bangkit.recyclopedia.view.ViewModelFactory
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.bangkit.recyclopedia.view.profile.ProfileActivity
@@ -33,7 +20,7 @@ import com.bangkit.recyclopedia.view.takephoto.TakePhotoActivity
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
+//    private lateinit var homeViewModel: HomeViewModel
 
     private val recycleListAdapter: HomeAdapter by lazy { HomeAdapter() }
 
@@ -48,24 +35,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupViewModel()
         initView()
-        // Set onClick listener for FloatingActionButton
-//        binding.btnCamera.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
-//        }
     }
 
-
-
-    private fun setupViewModel() {
-        homeViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(UserPreference.getInstance(dataStore), this)
-        )[HomeViewModel::class.java]
-    }
 
     private fun initView() {
         binding.apply {
@@ -102,9 +74,9 @@ class HomeActivity : AppCompatActivity() {
                 adapter = recycleListAdapter
 
                 recycleListAdapter.submitList(listOf(
-                    RecycleItem(R.drawable.image_cardboard, "Kardus", "Kardus adalah jenis sampah yang berasal dari bahan kertas yang tebal dan kuat. Agar alam bisa menguraikan atau menghancurkan kardus diperlukan waktu yang lama, kardus membutuhkan waktu sekitar 5 bulan untuk dapat terurai di alam. Untuk mengurangi volume sampah kardus, kardus dapat diolah dengan cara daur ulang. Fakta menarik dari kardus Kardus yang didaur ulang bisa digunakan kembali untuk membuat kardus baru, kertas tulis, dan produk kertas lainnya. Setiap ton kardus yang didaur ulang dapat menghemat 17 pohon dan 7000 galon air."),
-                    RecycleItem(R.drawable.image_paper, "Kertas", "Kertas adalah jenis sampah yang berasal dari serat kayu atau bahan organik lainnya yang diolah menjadi lembaran tipis. Kertas sangat umum digunakan dalam kehidupan sehari-hari, seperti untuk mencetak, menulis, atau sebagai bahan kemasan. Agar alam bisa menguraikan atau menghancurkan kertas diperlukan waktu yang bervariasi, biasanya sekitar 2 – 5 bulan untuk dapat terurai di alam. Untuk mengurangi volume sampah kertas, kertas dapat diolah dengan cara daur ulang. Fakta menarik dari kertas: Kertas yang didaur ulang bisa digunakan kembali untuk membuat kertas baru, tisu, dan produk kertas lainnya. Setiap ton kertas yang didaur ulang dapat menghemat sekitar 17 pohon, 380 galon minyak, dan 7000 galon air."),
-                    RecycleItem(R.drawable.image_glass_bottle, "Botol Kaca", "Botol kaca adalah jenis sampah yang berasal dari bahan kaca yang diproduksi melalui peleburan pasir, natrium karbonat, dan batu kapur. Kaca sangat umum digunakan sebagai wadah minuman, makanan, dan berbagai produk lainnya karena sifatnya yang tahan lama dan tidak bereaksi dengan isinya. Agar alam bisa menguraikan atau menghancurkan botol kaca diperlukan waktu yang sangat lama, hingga 100 juta tahun. Untuk mengurangi volume sampah botol kaca, kaca dapat diolah dengan cara daur ulang. Fakta menarik dari botol kaca: kaca yang didaur ulang selalu menjadi bagian dari bahan untuk membuat wadah kaca yang baru. Kaca juga dapat digunakan kembali secara berulang-ulang tanpa kehilangan kualitas. Daur ulang satu ton kaca dapat menghemat sekitar 42 kilowatt jam energi dan mengurangi polusi udara sebesar 20%."),
+                    RecycleItem(R.drawable.image_kardus_kotak, "Kardus", "Kardus adalah jenis sampah yang berasal dari bahan kertas yang tebal dan kuat. Agar alam bisa menguraikan atau menghancurkan kardus diperlukan waktu yang lama, kardus membutuhkan waktu sekitar 5 bulan untuk dapat terurai di alam. Untuk mengurangi volume sampah kardus, kardus dapat diolah dengan cara daur ulang. Fakta menarik dari kardus Kardus yang didaur ulang bisa digunakan kembali untuk membuat kardus baru, kertas tulis, dan produk kertas lainnya. Setiap ton kardus yang didaur ulang dapat menghemat 17 pohon dan 7000 galon air."),
+                    RecycleItem(R.drawable.image_kertas_daur_ulang, "Kertas", "Kertas adalah jenis sampah yang berasal dari serat kayu atau bahan organik lainnya yang diolah menjadi lembaran tipis. Kertas sangat umum digunakan dalam kehidupan sehari-hari, seperti untuk mencetak, menulis, atau sebagai bahan kemasan. Agar alam bisa menguraikan atau menghancurkan kertas diperlukan waktu yang bervariasi, biasanya sekitar 2 – 5 bulan untuk dapat terurai di alam. Untuk mengurangi volume sampah kertas, kertas dapat diolah dengan cara daur ulang. Fakta menarik dari kertas: Kertas yang didaur ulang bisa digunakan kembali untuk membuat kertas baru, tisu, dan produk kertas lainnya. Setiap ton kertas yang didaur ulang dapat menghemat sekitar 17 pohon, 380 galon minyak, dan 7000 galon air."),
+                    RecycleItem(R.drawable.image_kaca_, "Botol Kaca", "Botol kaca adalah jenis sampah yang berasal dari bahan kaca yang diproduksi melalui peleburan pasir, natrium karbonat, dan batu kapur. Kaca sangat umum digunakan sebagai wadah minuman, makanan, dan berbagai produk lainnya karena sifatnya yang tahan lama dan tidak bereaksi dengan isinya. Agar alam bisa menguraikan atau menghancurkan botol kaca diperlukan waktu yang sangat lama, hingga 100 juta tahun. Untuk mengurangi volume sampah botol kaca, kaca dapat diolah dengan cara daur ulang. Fakta menarik dari botol kaca: kaca yang didaur ulang selalu menjadi bagian dari bahan untuk membuat wadah kaca yang baru. Kaca juga dapat digunakan kembali secara berulang-ulang tanpa kehilangan kualitas. Daur ulang satu ton kaca dapat menghemat sekitar 42 kilowatt jam energi dan mengurangi polusi udara sebesar 20%."),
                     RecycleItem(R.drawable.image_plastik, "Botol Plastik", "Botol plastik adalah jenis sampah yang berasal dari bahan polimer sintetis seperti PET (polyethylene terephthalate), HDPE (high-density polyethylene), dan jenis plastik lainnya. Botol plastik banyak digunakan sebagai wadah minuman, produk pembersih, dan berbagai cairan lainnya karena sifatnya yang ringan, kuat, dan tahan lama. Agar alam bisa menguraikan atau menghancurkan botol plastik diperlukan waktu yang sangat lama, biasanya sekitar 450 tahun atau lebih. Untuk mengurangi volume sampah botol plastik, plastik dapat diolah dengan cara daur ulang. Fakta menarik dari botol plastik: Daur ulang satu ton plastik dapat menghemat sekitar 5.774 kWh energi, 16,3 barel minyak, 30 meter kubik ruang tempat pembuangan akhir, dan mengurangi emisi karbon dioksida sebanyak 2 ton."),
                     RecycleItem(R.drawable.image_kaleng, "Kaleng", "Kaleng minuman adalah jenis sampah yang berasal dari bahan aluminium atau kadang-kadang baja yang digunakan sebagai wadah minuman ringan, jus, bir, dan berbagai minuman lainnya. Kaleng minuman sangat populer karena ringan, mudah didaur ulang, dan memiliki kemampuan untuk menjaga kesegaran isi minuman. Agar alam bisa menguraikan atau menghancurkan kaleng minuman diperlukan waktu yang sangat lama, bahkan hingga 200 – 500 tahun. Untuk mengurangi volume sampah kaleng minuman, kaleng dapat diolah dengan cara daur ulang. Fakta menarik dari kaleng minuman: Daur ulang satu ton aluminium dapat menghemat sekitar 14.000 kWh energi, 40 barel minyak, dan mengurangi emisi karbon dioksida sebanyak 10 ton."),
                 ))

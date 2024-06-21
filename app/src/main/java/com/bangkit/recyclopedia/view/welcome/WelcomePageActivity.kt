@@ -8,11 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.bangkit.recyclopedia.R
 import com.bangkit.recyclopedia.databinding.ActivityWelcomePageBinding
 import com.bangkit.recyclopedia.view.login.LoginActivity
 import com.bangkit.recyclopedia.view.signup.SignupActivity

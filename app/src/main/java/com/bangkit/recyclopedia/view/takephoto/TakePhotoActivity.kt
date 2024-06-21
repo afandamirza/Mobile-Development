@@ -34,6 +34,7 @@ import com.bangkit.recyclopedia.data.pref.UserPreference
 import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.view.ViewModelFactory
 import com.bangkit.recyclopedia.view.classification.ClassificationResultActivity
+import com.bangkit.recyclopedia.view.classification.FailedResultActivity
 import com.bangkit.recyclopedia.view.homepage.HomeActivity
 import com.bangkit.recyclopedia.view.homepage.HomeActivity.Companion.REQUEST_CODE_PICK_IMAGE
 import okhttp3.MediaType.Companion.toMediaType
@@ -62,11 +63,6 @@ class TakePhotoActivity : AppCompatActivity() {
     private val uiState: MutableLiveData<TakePhotoUiState> = MutableLiveData(TakePhotoUiState.Idle)
 
     private val _finishingActivity = MutableLiveData<Boolean>()
-    val finishActivity: LiveData<Boolean> = _finishingActivity
-
-
-    private var getFile: File? = null
-
 
     private var isTrash: Boolean = false
     private var imageUri: Uri? = null
@@ -113,14 +109,6 @@ class TakePhotoActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore), this )
         )[TakePhotoViewModel::class.java]
 
-//        takePhotoViewModel.finishActivity.observe(this) {
-//            if (it == true) {
-//                val intent = Intent(this, ClassificationResultActivity::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                startActivity(intent)
-//                finish()
-//            }
-//        }
     }
 
     private fun initView() {
@@ -150,39 +138,35 @@ class TakePhotoActivity : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            onBackPressed()
-            true
+            finish()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.backHome.setOnClickListener {
+            finish()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.titleRetakePhoto.setOnClickListener {
+            finish()
+            val intent = Intent(this, TakePhotoActivity::class.java)
+            startActivity(intent)
         }
 
 
-//
-//        binding.btnStartGuessing.setOnClickListener {
-//            val intent = Intent(this, DescriptionActivity::class.java)
-//            startActivity(intent)
-//        }
-
-//        binding.btnClaimPoint.setOnClickListener {
-//            val intent = Intent(this@TakePhotoActivity, TransactionActivity::class.java)
-//            intent.putExtra(TransactionActivity.EXTRA_IS_CLAIM_POINT, true)
-//            startActivity(intent)
-//        }
-//
-//        binding.btnContinueLater.setOnClickListener {
-//            val intent = Intent(this@TakePhotoActivity, TransactionActivity::class.java)
-//            intent.putExtra(TransactionActivity.EXTRA_IS_CLAIM_POINT, false)
-//            startActivity(intent)
-//        }
     }
 
     private fun observeUiState() {
         uiState.observe(this) { uiState ->
-            binding.titleTakePhoto.isVisible = (uiState is TakePhotoUiState.Idle).not()
+            binding.titleRetakePhoto.isVisible = (uiState is TakePhotoUiState.Idle).not()
             binding.layoutTakePhoto.isVisible = uiState is TakePhotoUiState.Idle
             binding.btnStartGuessing.isVisible = (uiState is TakePhotoUiState.StartGuessing)
             binding.layoutClaimPoint.isVisible = (uiState is TakePhotoUiState.ClaimPoint)
             binding.ivPreview.isVisible = (uiState is TakePhotoUiState.StartGuessing || uiState is TakePhotoUiState.ClaimPoint || uiState is TakePhotoUiState.Uploading)
             binding.cameraPreview.isVisible = uiState is TakePhotoUiState.Idle
-            binding.progressBar.isVisible = (uiState is TakePhotoUiState.Uploading) // Show progress bar during uploading
+            binding.progressBar.isVisible = (uiState is TakePhotoUiState.Uploading)
             binding.progressTextMain.isVisible = (uiState is TakePhotoUiState.Uploading)
 
         }
@@ -246,6 +230,7 @@ class TakePhotoActivity : AppCompatActivity() {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
+
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri
                     if (savedUri != null) {
@@ -278,23 +263,26 @@ class TakePhotoActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun startGuessing() {
+        Log.d(TAG, "Start Guessing button clicked")
         imageUri?.let {
+            Log.d(TAG, "Image URI found: $it")
+            uiState.value = TakePhotoUiState.Uploading
             uploadImage(it)
         } ?: Log.e(TAG, "No image to upload")
     }
 
     private fun uploadImage(imageUri: Uri) {
+        Log.d(TAG, "Uploading image: $imageUri")
         val filePath = getRealPathFromURI(imageUri)
         if (filePath == null) {
             Log.e(TAG, "Failed to get real path from URI")
-            // Handle the error scenario, e.g., show a message to the user
+            Toast.makeText(this, "Failed to get image path", Toast.LENGTH_SHORT).show()
             return
         }
 
         val file = File(filePath)
+
         val requestFile: RequestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val body: MultipartBody.Part = MultipartBody.Part.createFormData("image", file.name, requestFile)
         val description: RequestBody = RequestBody.create(MultipartBody.FORM, "image description")
@@ -307,14 +295,43 @@ class TakePhotoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val predictionResponse = response.body()
                     Log.d(TAG, "Upload succeeded: ${predictionResponse?.data?.result}")
-                    uiState.value = TakePhotoUiState.ClaimPoint // Show "Claim Point" and "Continue Later" buttons
+
+                    when (predictionResponse?.status) {
+                        "success" -> {
+                            Log.d(TAG, "Prediction succeeded")
+                            val intent = Intent(this@TakePhotoActivity, ClassificationResultActivity::class.java)
+                            intent.putExtra("result", predictionResponse.data?.result)
+                            intent.putExtra("confidenceScore", predictionResponse.data?.confidenceScore)
+                            startActivity(intent)
+                            finish()
+                        }
+                        "error" -> {
+                            Log.e(TAG, "Prediction error: ${predictionResponse.message}")
+                            val intent = Intent(this@TakePhotoActivity, ClassificationResultActivity::class.java)
+                            intent.putExtra("message", predictionResponse.message)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else -> {
+                            Log.e(TAG, "Unexpected status: ${predictionResponse?.status}")
+                            val intent = Intent(this@TakePhotoActivity, FailedResultActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
                 } else {
                     Log.e(TAG, "Upload failed: ${response.message()}")
+                    val intent = Intent(this@TakePhotoActivity, FailedResultActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    Toast.makeText(this@TakePhotoActivity, "Upload failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ImagePredictionResponse>, t: Throwable) {
                 Log.e(TAG, "Upload failed: ${t.message}", t)
+                Toast.makeText(this@TakePhotoActivity, "Upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
+                finish()
             }
         })
     }

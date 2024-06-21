@@ -20,7 +20,6 @@ import com.bangkit.recyclopedia.data.pref.dataStore
 import com.bangkit.recyclopedia.databinding.ActivityProfileBinding
 import com.bangkit.recyclopedia.view.ViewModelFactory
 import com.bangkit.recyclopedia.view.history.HistoryActivity
-import com.bangkit.recyclopedia.view.homepage.HomeActivity
 import com.bangkit.recyclopedia.view.welcome.WelcomePageActivity
 
 class ProfileActivity  : AppCompatActivity() {
