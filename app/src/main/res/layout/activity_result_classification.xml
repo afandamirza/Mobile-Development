@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.classification.ClassificationResultActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_left"
+                android:background="@null"
+                android:layout_marginTop="40dp"
+                app:tint="#269E40" />
+
+            <ImageView
+                android:layout_width="47dp"
+                android:layout_marginTop="-40dp"
+                android:layout_height="75dp"
+                android:src="@drawable/image_trash"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="42dp"
+                android:text="Jenis sampahmu adalah:"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_bold"
+                android:layout_marginTop="24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/result"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="42dp"
+                android:text="Result"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="36dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_linear_gradient_green"
+                android:text="Fact:"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/fact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/fact_description"
+                android:layout_marginHorizontal="36dp"
+                android:fontFamily="@font/open_sans"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/bg_linear_gradient_green"
+                android:text="Creative Idea:"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/ide_gambar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/plastik_pot"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28dp" />
+
+            <TextView
+                android:id="@+id/judul_ide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_extrabold"
+                android:paddingHorizontal="16dp"
+                android:text="Flower vase"
+                android:textAlignment="center"
+                android:textColor="#1B9536"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text_alat_dan_bahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="36dp"
+                android:textSize="14sp"
+                android:layout_marginTop="38dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/text_idea" />
+
+            <TextView
+                android:id="@+id/text_intruksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="36dp"
+                android:textSize="14sp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/text_instruction" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/bg_linear_gradient_green"
+                android:text="More Tutorials:"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:paddingStart="38dp"
+                android:paddingEnd="16dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="83dp"
+                android:paddingBottom="112dp"
+                android:text="@string/app_name"
+                android:layout_gravity="center"
+                android:fontFamily="@font/chakra_petch_bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_recycling"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_linear_gradient_green_rounded"
+        app:backgroundTint="@null"
+        android:text="Recycling!"
+        android:layout_toStartOf="@id/divider"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:layout_marginEnd="17dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textSize="18sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_throw_away"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_linear_gradient_grey_rounded"
+        app:backgroundTint="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="38dp"
+        android:layout_toEndOf="@id/divider"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Buang"
+        android:textColor="#1B9536"
+        android:textSize="18sp"/>
+</RelativeLayout>

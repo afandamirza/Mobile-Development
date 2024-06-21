@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="34dp"
+    tools:context=".view.classification.TrashActionActivity">
+
+    <ImageView
+        android:id="@+id/iv_checkmark"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:src="@drawable/ic_circle_checkmark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_checkmark"
+        android:text="Terima Kasih!"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toStartOf="@id/iv_checkmark"
+        app:layout_constraintEnd_toEndOf="@id/iv_checkmark"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="26sp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_decription"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:includeFontPadding="false"
+        android:text="Jangan lupa untuk membuang sampah pada tempatnya."
+        android:textAlignment="center"
+        android:textColor="#1D8C35"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_title"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="120dp"
+        android:backgroundTint="#1A9435"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Lihat History"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_decription" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#1A9435"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Kembali ke Home"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_history"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
